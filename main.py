@@ -60,7 +60,7 @@ age_entry = Entry()
 age_entry.grid(column=1, row=4, pady=10,)
 
 
-label = Label(text='Tell me which exercise you carry out today:')
+label = Label(text='Tell me which exercise you carried out today:')
 label.grid(column=0, row=5,)
 entry = Entry(width=50)
 entry.grid(column=0, row=6, columnspan=2, pady=10,)
@@ -90,7 +90,7 @@ exercise = data['exercises'][0]['name'].title()
 duration = data['exercises'][0]['duration_min']
 calories = data['exercises'][0]['nf_calories']
 
-sheety_endpoint = '' #Endpoint from sheety
+sheety_endpoint = ''   #Endpoint from sheety
 
 # This should correspond with your google sheet field
 body = {
@@ -106,9 +106,10 @@ body = {
 }
 
 is_ok = messagebox.askokcancel(title='Do you want to log this:',
-                               message=f'Date: {date_now}\nTime: {time}\nExercise: {exercise}'
+                               message=f'Date: {date_now}\nTime: {time}\nName: {name}\nExercise: {exercise}'
                                        f'\nDuration: {duration}\nCalories: {calories}',
                                icon='question')
 
 if is_ok:
     response = requests.post(url=sheety_endpoint, json=body)
+    messagebox.showinfo('Workout Logger', 'logged successfully')
